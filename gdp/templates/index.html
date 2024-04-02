@@ -16,9 +16,11 @@
                  hx-get="{% url 'index' %}"
                  hx-target="#barchart"
                  class="custom-select"
+                hx-vals="js:{count: document.getElementById('count').value}">
+                        <option value="">Select Year</option
                  >
                     {% for year in years %}
-                        <option value="{{ year }}">{{ year }}</option>
+                        <option value="{{ year }}" {% if year_selected == year %} selected {% endif %}>{{ year }}</option>
                     {% endfor %}
                 </select>
                 <hr />
@@ -30,6 +32,7 @@
                    value={{count}}
                     hx-get="{% url 'index' %}"
                     hx-target="#barchart"
+                    hx-vals="js:{year: document.getElementById('select-year').value}"
                      />
         </div>
     </div>
