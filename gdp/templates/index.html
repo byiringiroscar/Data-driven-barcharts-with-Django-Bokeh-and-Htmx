@@ -1,4 +1,5 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %} hx-get="{% url 'index' %}"
+                 hx-target="#barchart"
 
 {% block content %}
     <p class="lead">GDP by  country</p>
@@ -8,7 +9,6 @@
             {% include 'partials/gdp-bar.html' %}
         </div>
         <div class="col-2">
-            <form action="">
                 <select
                  name="year"
                  id="select-year"
@@ -23,8 +23,14 @@
                 </select>
                 <hr />
                 <label for="">Count</label>
-                <input type="number" id="count" name="count" autocomplete="off" value={{count}}  />
-            </form>
+                <input type="number"
+                 id="count"
+                  name="count"
+                   autocomplete="off" 
+                   value={{count}}
+                    hx-get="{% url 'index' %}"
+                    hx-target="#barchart"
+                     />
         </div>
     </div>
 
