@@ -15,6 +15,7 @@
                  autocomplete="off"
                  hx-get="{% url 'index' %}"
                  hx-target="#barchart"
+                 class="custom-select"
                  >
                     {% for year in years %}
                         <option value="{{ year }}">{{ year }}</option>
