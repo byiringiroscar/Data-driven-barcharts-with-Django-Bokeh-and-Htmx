@@ -11,5 +11,10 @@ def index(request):
     # define number of countries to fetch
     count = int(request.GET.get('count', 10))
 
-    gpps = GDP.objects.filter(year=year).order_by('gdp').reverse()[:count]
+    gdps = GDP.objects.filter(year=year).order_by('gdp').reverse()[:count]
+
+    country_names = [d.country for d in gdps]
+    country_gdps = [d.gdp for d in gdps]
+
+
     return render(request, 'index.html')
