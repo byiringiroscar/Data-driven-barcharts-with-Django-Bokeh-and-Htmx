@@ -23,4 +23,19 @@ def index(request):
     country_gdps = [d.gdp for d in gdps]
 
 
-    return render(request, 'index.html')
+    cds = ColumnDataSource(data=dict(country=country_names, gdp=country_gdps))
+
+    fig = figure(x_range=country_names, plot_height=500, title=f'Top {count} GDPs ({year})')
+
+    fig.vbar(source=cds, x='country_names', y='country_gdps', width=0.8)
+
+    script, div = components(fig)
+
+    context = {
+        'script': script,
+        'div': div,
+        'year': year,
+        'count': count
+    }
+
+    return render(request, 'index.html', context)
