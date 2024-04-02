@@ -3,6 +3,26 @@
 {% block content %}
     <p class="lead">GDP by  country</p>
 
-    {{ div|safe }}
-    {{ script|safe }}
+    <div class="row">
+        <div class="col-10" id="barchart">
+            {% include 'partials/gdp-bar.html' %}
+        </div>
+        <div class="col-2">
+            <form action="">
+                <select
+                 name="year"
+                 id="select-year"
+                 autocomplete="off"
+                 hx-get="{% url 'index' %}"
+                 hx-target="#barchart"
+                 >
+                    {% for year in years %}
+                        <option value="{{ year }}">{{ year }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    </div>
+
+    
 {% endblock %}

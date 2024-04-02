@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.db.models import Max
+from django.db.models import Max, Min
 from gdp.models import GDP
 import math
 
@@ -13,6 +13,7 @@ from bokeh.plotting import figure
 def index(request):
     # define which year we want the data from
     max_year = GDP.objects.aggregate(max_yr=Max('year'))['max_yr']
+    min_year = GDP.objects.aggregate(min_year=Min('year'))['min_year']
     year = request.GET.get('year', max_year)
 
     # define number of countries to fetch
@@ -39,8 +40,10 @@ def index(request):
     context = {
         'script': script,
         'div': div,
-        'year': year,
+        'years': range(min_year, max_year+1),
         'count': count
     }
+    if request.htmx:
+        return render(request, 'partials/gdp-bar.html', context)
 
     return render(request, 'index.html', context)
