@@ -2,6 +2,12 @@ from django.shortcuts import render
 from django.db.models import Max
 from gdp.models import GDP
 
+from bokeh.models import ColumnDataSource
+from bokeh.embed import components
+from bokeh.plotting import figure
+
+
+
 # Create your views here.
 def index(request):
     # define which year we want the data from
